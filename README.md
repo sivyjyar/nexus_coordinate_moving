@@ -97,3 +97,4 @@ To launch two nexus robots, use the following launch file:
 
 ## To do
 * Add wheel velocity controller (only for visual feedback)
+# nexus_coordinate_moving
