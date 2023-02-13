@@ -1,0 +1,29 @@
+<gazebo reference="link_chassis">
+  <material>Gazebo/Yellow</material>
+ </gazebo>
+
+<gazebo reference="left_front_shaft">
+  <material>Gazebo/Yellow</material>
+ </gazebo>
+<gazebo reference="left_back_shaft">
+  <material>Gazebo/Yellow</material>
+   </gazebo>
+<gazebo reference="right_front_shaft">
+  <material>Gazebo/Yellow</material>
+   </gazebo>
+<gazebo reference="right_back_shaft">
+  <material>Gazebo/Yellow</material>
+   </gazebo>
+
+<gazebo reference="left_front_wheel">
+  <material>Gazebo/Black</material>
+   </gazebo>
+<gazebo reference="left_back_wheel">
+  <material>Gazebo/Black</material>
+   </gazebo>
+<gazebo reference="right_front_wheel">
+  <material>Gazebo/Black</material>
+   </gazebo>
+<gazebo reference="right_back_wheel">
+  <material>Gazebo/Black</material>
+   </gazebo>

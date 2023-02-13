@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<robot name="simple_robot"  xmlns:xacro="http://www.ros.org/wiki/xacro">
+<!-- include my xacro to simplify urdf: -->
+<xacro:include filename="$(find simple_robot)/urdf/links_joints.xacro" />
+<!-- include my hazebo to simplify urdf: -->
+<!-- xacro:include filename="$(find simple_robot)/urdf/simple.gazebo" / -->
+
+
+
+<material name="black">
+  <color rgba="0 0 0 1"></color>
+</material>
+
+<material name="yellow">
+   <color rgba="1.0 1.0 0 1"></color>
+</material>
+
+<!-- chassis and left_front: -->
+
+  <m_link_box name="link_chassis" origin_rpy="0 0 0" material="yellow"
+            origin_xyz="0 0 0.3" size="2 1.2 0.3" />
+
+
+  <m_joint name="LF_shaft_joint" type="fixed" origin_rpy="0 0 0" axis_xyz="0 0 0"
+           origin_xyz="0 0 0" parent="link_chassis" child="left_front_shaft" />
+
+  <m_link_cylinder name="left_front_shaft" origin_rpy="1.57 0 0" material="yellow"
+                   origin_xyz="0.7 0.7 0.3" radius="0.1" length="0.3" />
+
+  <m_joint name="LF_wheel_joint" type="continuous" origin_rpy="0 0 0" axis_xyz="0 1 0"
+           origin_xyz="0 0.02 0" parent="left_front_shaft" child="left_front_wheel" />
+
+  <m_link_cylinder name="left_front_wheel" origin_rpy="1.57 0 0" material="black"
+                   origin_xyz="0 0 0" radius="0.3" length="0.2" />
+
+
+<!-- left_back: -->
+
+  <m_joint name="LB_shaft_joint" type="fixed" origin_rpy="1.57 0 0" axis_xyz="0 0 0"
+           origin_xyz="-0.7 0.7 0.3" parent="link_chassis" child="left_back_shaft" />
+
+  <m_link_cylinder name="left_back_shaft" origin_rpy="0 0 0" material="yellow"
+                   origin_xyz="0 0 0.3" radius="0.1" length="0.3" />
+
+  <m_link_cylinder name="left_back_wheel" origin_rpy="1.57 0 0" material="black"
+                   origin_xyz="-0.7 0.72 0.3" radius="0.3" length="0.2" />
+
+  <m_joint name="LB_wheel_joint" type="continuous" origin_rpy="0 0 0" axis_xyz="0 1 0"
+           origin_xyz="-0.7 0.72 0" parent="left_back_shaft" child="left_back_wheel" />
+
+
+
+
+<!-- right_front: -->
+
+
+  <m_link_cylinder name="right_front_shaft" origin_rpy="1.57 0 0" material="yellow"
+                   origin_xyz="0.7 -0.7 0.3" radius="0.1" length="0.3" />
+
+  <m_joint name="RF_shaft_joint" type="fixed" origin_rpy="0 0 0" axis_xyz="0 0 0"
+           origin_xyz="0 0 0.3" parent="link_chassis" child="right_front_shaft" />
+
+
+  <m_link_cylinder name="right_front_wheel" origin_rpy="1.57 0 0" material="black"
+                   origin_xyz="0.7 -0.72 0.3" radius="0.3" length="0.2" />
+
+  <m_joint name="RF_wheel_joint" type="continuous" origin_rpy="0 0 0" axis_xyz="0 1 0"
+           origin_xyz="0 0 0" parent="right_front_shaft" child="right_front_wheel" />
+
+
+<!-- right_back: -->
+
+  <m_link_cylinder name="right_back_shaft" origin_rpy="1.57 0 0" material="yellow"
+                   origin_xyz="-0.7 -0.7 0.3" radius="0.1" length="0.3" />
+
+  <m_joint name="RB_shaft_joint" type="fixed" origin_rpy="0 0 0" axis_xyz="0 0 0"
+           origin_xyz="-0.7 -0.7 0.3" parent="link_chassis" child="right_back_shaft" />
+
+
+  <m_link_cylinder name="right_back_wheel" origin_rpy="1.57 0 0" material="black"
+                   origin_xyz="-0.7 -0.72 0.3" radius="0.3" length="0.2" />
+
+  <m_joint name="RB_wheel_joint" type="continuous" origin_rpy="0 0 0" axis_xyz="0 1 0"
+           origin_xyz="0 0 0" parent="right_back_shaft" child="right_back_wheel" />
+
+
+</robot>
+
