@@ -1,0 +1,125 @@
+<?xml version="1.0" ?>
+<robot name="simple_robot"  xmlns:xacro="http://www.ros.org/wiki/xacro">
+<!-- include my xacro to simplify urdf: -->
+<xacro:include filename="$(find simple_robot)/urdf/links_joints.xacro" />
+<!-- include my gazebo to simplify urdf: -->
+<xacro:include filename="$(find simple_robot)/urdf/simple.gazebo" />
+
+
+<material name="black">
+  <color rgba="0 0 0 1"></color>
+</material>
+
+<material name="yellow">
+   <color rgba="1.0 1.0 0 1"></color>
+</material>
+
+<!--base footprint and chassis -->
+
+  <link name="base_footprint"></link>
+
+  <m_joint name="base_joint" type="fixed" origin_rpy="0 0 0" axis_xyz="0 0 0"         
+          origin_xyz="0 0 0" parent="base_footprint" child="link_chassis" />  
+
+  <m_link_box name="link_chassis" origin_rpy="0 0 0" material="yellow"
+                   origin_xyz="0 0 0.3" size="2 1.2 0.3" />
+
+<!--left_front: -->
+
+ <m_joint name="LF_shaft_joint" type="fixed" origin_rpy="0 0 0" axis_xyz="0 0 0"         
+          origin_xyz="0.7 0.6 0.3" parent="link_chassis" child="left_front_shaft" />  
+
+  <m_link_shaft name="left_front_shaft" origin_rpy="1.57 0 0" material="yellow"
+                   origin_xyz="0 0 0" radius="0.1" length="0.1" /> 
+
+  <m_joint name="LF_wheel_joint" type="continuous" origin_rpy="0 0 0" axis_xyz="0 1 0"
+           origin_xyz="0 0 0" parent="left_front_shaft" child="left_front_wheel" />
+
+  <m_link_wheel name="left_front_wheel" origin_rpy="1.57 0 0" material="black"
+                   origin_xyz="0 0.15 0" radius="0.3" length="0.2" />
+
+
+
+<!-- left_back: -->
+
+  <m_joint name="LB_shaft_joint" type="fixed" origin_rpy="0 0 0" axis_xyz="0 0 0"
+           origin_xyz="-0.7 0.6 0.3" parent="link_chassis" child="left_back_shaft" />
+
+  <m_link_shaft name="left_back_shaft" origin_rpy="1.57 0 0" material="yellow"
+                   origin_xyz="0 0 0" radius="0.1"  length="0.1" />
+
+  <m_joint name="LB_wheel_joint" type="continuous" origin_rpy="0 0 0" axis_xyz="0 1 0"
+           origin_xyz="0 0 0" parent="left_back_shaft" child="left_back_wheel" />
+
+  <m_link_wheel name="left_back_wheel" origin_rpy="1.57 0 0" material="black"
+                   origin_xyz="0 0.15 0" radius="0.3" length="0.2" />
+
+
+
+<!-- right_front: -->
+
+
+  <m_joint name="RF_shaft_joint" type="fixed" origin_rpy="0 0 0" axis_xyz="0 0 0"
+           origin_xyz="0.7 -0.6 0.3" parent="link_chassis" child="right_front_shaft" />
+
+  <m_link_shaft name="right_front_shaft" origin_rpy="1.57 0 0" material="yellow"
+                   origin_xyz="0 0 0" radius="0.1"  length="0.1" />
+
+  <m_joint name="RF_wheel_joint" type="continuous" origin_rpy="0 0 0" axis_xyz="0 1 0"
+           origin_xyz="0 0 0" parent="right_front_shaft" child="right_front_wheel" />
+
+  <m_link_wheel name="right_front_wheel" origin_rpy="1.57 0 0" material="black"
+                   origin_xyz="0 -0.15 0" radius="0.3" length="0.2" />
+
+
+<!-- right_back: -->
+
+  <m_joint name="RB_shaft_joint" type="fixed" origin_rpy="0 0 0" axis_xyz="0 0 0"
+           origin_xyz="-0.7 -0.6 0.3" parent="link_chassis" child="right_back_shaft" />
+
+  <m_link_shaft name="right_back_shaft" origin_rpy="1.57 0 0" material="yellow"
+                   origin_xyz="0 0 0" radius="0.1"  length="0.1" />
+
+  <m_joint name="RB_wheel_joint" type="continuous" origin_rpy="0 0 0" axis_xyz="0 1 0"
+           origin_xyz="0 0 0" parent="right_back_shaft" child="right_back_wheel" />
+
+  <m_link_wheel name="right_back_wheel" origin_rpy="1.57 0 0" material="black"
+                   origin_xyz="0 -0.15 0" radius="0.3" length="0.2" />
+
+<!-- lidar -->
+  <m_joint name="sensor_box_jpint" type="fixed" origin_rpy="0 0 0" axis_xyz="0 0 0"
+           origin_xyz="0 0 0.45" parent="link_chassis" child="sensor_box" />
+
+  <m_link_box name="sensor_box" origin_rpy="0 0 0" material="yellow"
+                   origin_xyz="0 0 0" size="0.4 0.4 0.4" />
+
+  <m_joint name="sensor_joint" type="fixed" origin_rpy="0 0 0" axis_xyz="0 0 0"
+           origin_xyz="0 0 0.2" parent="sensor_box" child="hokuyo_link" />
+
+
+ <link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.3 0.3 0.15"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://simple_robot/meshes/hokuyo_ust10.stl" scale="3 3 1"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+
+
+</robot>
+

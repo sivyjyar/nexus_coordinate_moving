@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+  <xacro:macro name="m_joint" params="name type origin_rpy origin_xyz parent child axis_xyz">
+    <joint name="${name}" type="${type}">
+      <axis xyz = "${axis_xyz}"/>
+      <origin rpy="${origin_rpy}" xyz="${origin_xyz}" />
+      <parent link="${parent}" />
+      <child link="${child}" />
+    </joint>
+   </xacro:macro>
+
+
+
+  <xacro:macro name="m_link_shaft" params="name origin_rpy origin_xyz radius length material">
+    <link name="${name}">
+
+      <inertial>
+        <mass value="1"/>
+        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
+        <inertia ixx="0.1" iyy="0.1" izz="0.1" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+
+      <collision>
+        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${length}" />
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${length}" />
+        </geometry>
+        <material name="${material}" />
+      </visual>
+     </link>
+
+   </xacro:macro>
+
+
+  <xacro:macro name="m_link_wheel" params="name origin_rpy origin_xyz radius length material">
+    <link name="${name}">
+
+      <inertial>
+        <mass value="0.5"/>
+        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
+        <inertia ixx="0.05" iyy="0.1" izz="0.05" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+
+      <collision>
+        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${length}" />
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
+        <geometry>
+          <cylinder radius="${radius}" length="${length}" />
+        </geometry>
+        <material name="${material}" />
+      </visual>
+     </link>
+   </xacro:macro>
+
+
+
+  <xacro:macro name="m_link_box" params="name origin_rpy origin_xyz size material">
+    <link name="${name}">
+
+      <inertial>
+        <mass value="3"/>
+        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
+        <inertia ixx="0.2" iyy="0.2" izz="0.2" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+
+      <collision>
+        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
+         <geometry>
+           <box size="${size}"/>
+         </geometry>
+      </collision>
+
+      <visual>
+        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
+         <geometry>
+           <box size="${size}"/>
+         </geometry>
+         <material name="${material}" />
+      </visual>
+    </link>
+  </xacro:macro>
+
+</robot>
+ 
+
